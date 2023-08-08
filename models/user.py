@@ -49,8 +49,8 @@ class User:
 
         try:
             with connection.cursor() as cursor:
-                sql = "SELECT id, user_name, email FROM users WHERE id = %s"
-                cursor.execute(sql, (user_id,))
+                sql = "SELECT * FROM users WHERE id = %s"
+                cursor.execute(sql, user_id)
                 result = cursor.fetchone()
                 if result:
                     return User(id=result['id'], user_name=result['user_name'], email=result['email'])
