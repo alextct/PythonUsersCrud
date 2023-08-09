@@ -4,7 +4,7 @@ from app.utils.mysql_connection import establish_connection
 
 
 class User:
-    def __init__(self, id=None, user_name=None, email=None):
+    def __init__(self, id=None, user_name=None):
         self.id = id
         self.user_name = user_name
 
@@ -14,19 +14,23 @@ class User:
         try:
             with connection.cursor() as cursor:
                 if self.id is None:
-                    # Insert a new user
-                    sql = "INSERT INTO users (user_name, email) VALUES (%s, %s)"
-                    cursor.execute(sql, self.user_name)
+                    # we do not have the user and we have to add it now
+                    query = "INSERT INTO users (user_name) VALUES (%s)"
+                    cursor.execute(query, self.user_name)
                     connection.commit()
                     self.id = cursor.lastrowid
+
                 else:
-                    # Update an existing user
-                    sql = "UPDATE users SET user_name = %s WHERE id = %s"
-                    cursor.execute(sql, (self.user_name, self.id))
+                    # we have to update an existing user
+                    query = "UPDATE users SET user_name = %s WHERE id = %s"
+                    cursor.execute(query, (self.user_name, self.id))
                     connection.commit()
 
         finally:
             connection.close()
+
+            user = User.get_by_id(self.id)
+            return user
 
     @staticmethod
     def get_all():
@@ -34,11 +38,14 @@ class User:
 
         try:
             with connection.cursor() as cursor:
-                sql = "SELECT id, user_name, email FROM users"
-                cursor.execute(sql)
+                query = "SELECT id, user_name FROM users"
+                cursor.execute(query)
                 result = cursor.fetchall()
-                users = [User(id=row['id'], user_name=row['user_name'], email=row['email']) for row in result]
-                return users
+                if result:
+                    users = [User(id=row['id'], user_name=row['user_name']) for row in result]
+                    return users
+                else:
+                    return None
 
         finally:
             connection.close()
@@ -49,11 +56,11 @@ class User:
 
         try:
             with connection.cursor() as cursor:
-                sql = "SELECT * FROM users WHERE id = %s"
-                cursor.execute(sql, user_id)
+                query = "SELECT * FROM users WHERE id = %s"
+                cursor.execute(query, user_id)
                 result = cursor.fetchone()
                 if result:
-                    return User(id=result['id'], user_name=result['user_name'], email=result['email'])
+                    return User(id=result['id'], user_name=result['user_name'])
                 return None
 
         finally:
@@ -64,10 +71,15 @@ class User:
             connection = establish_connection()
 
             try:
-                with connection.cursor() as cursor:
-                    sql = "DELETE FROM users WHERE id = %s"
-                    cursor.execute(sql, (self.id,))
-                    connection.commit()
+                user = User.get_by_id(self.id)
+                if user:
+                    with connection.cursor() as cursor:
+                        query = "DELETE FROM users WHERE id = %s"
+                        cursor.execute(query, user.id)
+                        connection.commit()
+                        return user
+                else:
+                    return None
 
             finally:
                 connection.close()

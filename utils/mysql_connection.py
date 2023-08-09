@@ -1,3 +1,5 @@
+import sys
+
 import pymysql
 from decouple import config
 
@@ -23,4 +25,4 @@ def establish_connection():
 
     except pymysql.MySQLError as e:
         print(f"Error: {e}")
-        return None
+        sys.exit()
