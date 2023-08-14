@@ -8,9 +8,9 @@ app = Flask(__name__)
 @app.route('/data/<user_id>', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def user(user_id):
     if request.method == 'GET':
-        response =  User.get_by_id(user_id)
+        response = User.get_by_id(user_id)
         if response:
-            return response
+            return {'user_id': response.id, 'user name': response.user_name}
         return {"message": "User not found in DB"}
 
     elif request.method == 'POST':
@@ -18,11 +18,23 @@ def user(user_id):
         request_data = request.json
         # treating request_data as a dictionary to get a specific value from key
         user_name = request_data.get('user_name')
-        user = User(None, user_name)
-        response = User.save()
-        return response
+        user = User(id=None, user_name=user_name)
+        response = user.save()
+        if response:
+            return {'user_id': response.id, 'user name': response.user_name}
+        return {"message": "user " + user_name + " cannot be saved in the database"}
 
-        # return {'user id': user_id, 'user name': user_name}
+    elif request.method == 'PUT':
+        # getting the json data payload from request
+        request_data = request.json
+        # treating request_data as a dictionary to get a specific value from key
+        user_name = request_data.get('user_name')
+        id = user_id
+        user = User(id=id, user_name=user_name)
+        response = user.save()
+        if response:
+            return {'user_id': response.id, 'user name': response.user_name}
+        return {"message": "user " + user_id + " does not exist in the database"}
 
 
 # todo elif for put and delete

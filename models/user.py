@@ -60,7 +60,7 @@ class User:
                 cursor.execute(query, user_id)
                 result = cursor.fetchone()
                 if result:
-                    return User(id=result['id'], user_name=result['user_name'])
+                    return User(id=result[0], user_name=result[1])
                 return None
 
         finally:
