@@ -5,13 +5,13 @@ app = Flask(__name__)
 
 
 # supported methods
-@app.route('/data/<user_id>', methods=['GET', 'POST', 'DELETE', 'PUT'])
+@app.route('/users/<user_id>', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def user(user_id):
     if request.method == 'GET':
         response = User.get_by_id(user_id)
         if response:
-            return {'user_id': response.id, 'user name': response.user_name}
-        return {"message": "User not found in DB"}
+            return {'status': 'ok', 'user_name': response.user_name}, 200
+        return {"status": "error", "reason": "no such id - " + user_id}, 500
 
     elif request.method == 'POST':
         # getting the json data payload from request
@@ -21,8 +21,8 @@ def user(user_id):
         user = User(id=None, user_name=user_name)
         response = user.save()
         if response:
-            return {'user_id': response.id, 'user name': response.user_name}
-        return {"message": "user " + user_name + " cannot be saved in the database"}
+            return {'status': 'ok', 'user_added': response.user_name}, 200
+        return {"status": "error", "reason": "user " + user_name + " cannot be saved in the database"}, 500
 
     elif request.method == 'PUT':
         # getting the json data payload from request
@@ -33,11 +33,21 @@ def user(user_id):
         user = User(id=id, user_name=user_name)
         response = user.save()
         if response:
-            return {'user_id': response.id, 'user name': response.user_name}
-        return {"message": "user " + user_id + " does not exist in the database"}
+            return {'status': 'ok', 'user_updated': response.user_name}, 200
+        return {"status": "error", "reason": "user " + id + " does not exists in the database to be updated"}, 500
+
+    elif request.method == "DELETE":
+        id = user_id
+        user = User(id=id)
+        response = user.delete()
+        if response:
+            return {'status': 'ok', 'user_deleted': response.user_name}, 200
+        else:
+            return {"status": "error", "reason": "user " + id + " does not exist in the database to be deleted"}, 500
 
 
-# todo elif for put and delete
+
+
 
 
 app.run(host='127.0.0.1', debug=True, port=5000)
