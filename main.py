@@ -21,7 +21,7 @@ def user(user_id):
         user = User(id=None, user_name=user_name)
         response = user.save()
         if response:
-            return {'status': 'ok', 'user_added': response.user_name}, 200
+            return {'status': 'ok', 'user_added': response.user_name, 'id':response.id}, 200
         return {"status": "error", "reason": "user " + user_name + " cannot be saved in the database"}, 500
 
     elif request.method == 'PUT':

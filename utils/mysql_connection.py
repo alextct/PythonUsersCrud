@@ -11,13 +11,15 @@ def establish_connection():
     user = config('DB_USER')
     password = config('DB_PASSWORD')
     database = config('DB_NAME')
+    port = int(config('PORT'))
 
     try:
         connection = pymysql.connect(
             host=host,
             user=user,
             password=password,
-            db=database
+            db=database,
+            port=port
         )
 
         print("Connected to the MySQL database!")

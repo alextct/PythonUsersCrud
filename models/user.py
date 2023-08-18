@@ -1,14 +1,30 @@
 # models/user.py
-import pymysql
 from app.utils.mysql_connection import establish_connection
 
 
 class User:
+    """
+    Represents a user with attributes id and user_name.
+    Provides methods to interact with the users table in the database.
+    """
     def __init__(self, id=None, user_name=None):
+        """
+        Initialize a User object.
+
+        :param id: User ID. Default is None.
+        :param user_name: User's name. Default is None.
+        """
         self.id = id
         self.user_name = user_name
 
     def save(self):
+        """
+        Save a user to the database.
+        If the user already exists (has an id), update the user.
+        Otherwise, insert a new user.
+
+        :return: The saved or updated User object.
+        """
         connection = establish_connection()
 
         try:
@@ -34,6 +50,11 @@ class User:
 
     @staticmethod
     def get_all():
+        """
+        Fetch all users from the database.
+
+        :return: A list of User objects or None if no users exist.
+        """
         connection = establish_connection()
 
         try:
@@ -52,6 +73,12 @@ class User:
 
     @staticmethod
     def get_by_id(user_id):
+        """
+        Fetch a user by its ID.
+
+        :param user_id: The ID of the user to fetch.
+        :return: A User object or None if the user does not exist.
+        """
         connection = establish_connection()
 
         try:
@@ -67,6 +94,11 @@ class User:
             connection.close()
 
     def delete(self):
+        """
+        Delete the user from the database.
+
+        :return: The deleted User object or None if the user did not exist.
+        """
         if self.id is not None:
             connection = establish_connection()
 
