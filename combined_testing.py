@@ -50,7 +50,7 @@ finally:
 
 
 # FRONT END TESTING
-driver = webdriver.Chrome(service=Service("/home/alex/work/learn/PythonDevopsLessons/chromedriver"))
+driver = webdriver.Chrome(service=Service("/home/alex/work/learn/PythonDevopsLessons/chromedriver-linux64/chromedriver"))
 driver.implicitly_wait(1)
 getEndpoint = "http://127.0.0.1:5001/get_user_data/" + str(addedUserId)
 driver.get(getEndpoint)
