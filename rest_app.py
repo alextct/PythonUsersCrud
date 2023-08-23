@@ -10,9 +10,9 @@ app = Flask(__name__)
 
 # supported methods
 @app.route('/stop_server')
+@app.route('/stop_server')
 def stop_server():
-    os.kill(os.getpid(), signal.CTRL_C_EVENT)
-    return "Server stopped"
+    os.kill(os.getpid(), signal.SIGINT)
 
 @app.route('/users/<user_id>', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def user(user_id):
@@ -53,10 +53,6 @@ def user(user_id):
             return {'status': 'ok', 'user_deleted': response.user_name}, 200
         else:
             return {"status": "error", "reason": "user " + id + " does not exist in the database to be deleted"}, 500
-
-
-
-
 
 
 app.run(host='127.0.0.1', debug=True, port=5000)
