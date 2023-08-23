@@ -1,10 +1,14 @@
 from flask import Flask, request
 from app.models.user import User
+import os
+import signal
 
 app = Flask(__name__)
+@app.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(), signal.CTRL_C_EVENT)
+    return "Server stopped"
 
-
-# supported methods
 @app.route('/get_user_data/<user_id>', methods=['GET'])
 def get_user_name(user_id):
     if request.method == 'GET':
