@@ -1,12 +1,13 @@
 # models/user.py
-from app.utils.mysql_connection import establish_connection
-
+# from ..utils.mysql_connection import establish_connection
+from .mysql_connection import establish_connection
 
 class User:
     """
     Represents a user with attributes id and user_name.
     Provides methods to interact with the users table in the database.
     """
+
     def __init__(self, id=None, user_name=None):
         """
         Initialize a User object.

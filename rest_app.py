@@ -1,7 +1,7 @@
 import sys
 
 from flask import Flask, request
-from app.models.user import User
+from models.user import User
 import os
 import signal
 
