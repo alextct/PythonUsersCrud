@@ -26,7 +26,7 @@ pipeline {
                         echo "Flask is already installed."
                     }
                     sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                    shExitStatus = sh(script: 'pip show flask && python3 rest_app.py && python3 clean_environment.py', returnStatus: true)
+                    shExitStatus = sh(script: 'ls && pip show flask && python3 rest_app.py && python3 clean_environment.py', returnStatus: true)
 
                 }
             }
