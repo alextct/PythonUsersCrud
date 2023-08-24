@@ -25,8 +25,8 @@ pipeline {
                     } else {
                         echo "Flask is already installed."
                     }
-                    def flaskInstalled = sh(script: 'pip3 show pymysql', returnStatus: true)
-                    if (flaskInstalled != 0) {
+                    def pymysqlInstalled = sh(script: 'pip3 show pymysql', returnStatus: true)
+                    if (pymysqlInstalled != 0) {
                         echo "pymysql is not installed. Installing..."
                         sh 'pip3 install pymysql'
                     } else {
