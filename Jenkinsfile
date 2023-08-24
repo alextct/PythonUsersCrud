@@ -18,7 +18,7 @@ pipeline {
         stage('Start web_app'){
             steps{
                 script{
-                    shExitStatus = sh(script: 'python3 rest_app.py && python3 clean_environment.py', returnStatus: true)
+                    shExitStatus = sh(script: 'pip show flask && python3 rest_app.py && python3 clean_environment.py', returnStatus: true)
                 }
             }
         }
