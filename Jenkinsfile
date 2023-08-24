@@ -18,7 +18,7 @@ pipeline {
                     def sshExitStatus = -1
 
                     while (retryCount < maxRetries && sshExitStatus != 0) {
-                        sshExitStatus = sh(script: 'date;', returnStatus: true)
+                        sshExitStatus = sh(script: 'date', returnStatus: true)
 
                         if (sshExitStatus == 0) {
                             echo "Deploy made with success"

@@ -1,0 +1,8 @@
+pip install python-decouple
+pip install pymysql
+pip install cryptography
+pip install selenium
+pip install flask
+pip install requests
+docker run --name mysql -v $(pwd):/var/lib/mysql -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_DATABASE=mydb -e MYSQL_USER=user -e MYSQL_PASSWORD=password -p 3306:3306 -d mysql:8.0.33
+export PYTHONPATH=/home/alex/work/learn/PythonDevopsLessons/01.CrudUsers/:$PYTHONPATH
