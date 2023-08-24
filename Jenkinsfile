@@ -25,13 +25,7 @@ pipeline {
                     } else {
                         echo "Flask is already installed."
                     }
-                    def pythonPathExported = sh(script: 'echo $PYTHONPATH', returnStatus: true)
-                    if (pythonPathExported != 0) {
-                        echo "PYTHONPATH is not exported. Exporting..."
-                        sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                    } else {
-                        echo "PYTHONPATH is already exported."
-                    }
+                    sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
                     shExitStatus = sh(script: 'pip show flask && python3 rest_app.py && python3 clean_environment.py', returnStatus: true)
 
                 }
