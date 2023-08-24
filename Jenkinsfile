@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     triggers {
-        pollSCM('H/5 * * * *')
+        pollSCM('H/2 * * * *')
     }
 
     options {
@@ -18,7 +18,7 @@ pipeline {
         stage('Start web_app'){
             steps{
                 script{
-                    shExitStatus = sh(script: 'ls && python3 app/rest_app.py', returnStatus: true)
+                    shExitStatus = sh(script: 'python3 rest_app.py && python3 clean_environment.py', returnStatus: true)
                 }
             }
         }
