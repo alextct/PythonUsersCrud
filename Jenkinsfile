@@ -10,11 +10,11 @@ pipeline {
     }
 
     stages {
-        stage ('Checkout'){
-            steps{
-                    git 'https://github.com/alextct/PythonUsersCrud.git'
-            }
-        }
+        //stage ('Checkout'){
+            //steps{
+                    //git 'https://github.com/alextct/PythonUsersCrud.git'
+            //}
+        //}
         stage('Start web_app'){
             steps{
                 script{
