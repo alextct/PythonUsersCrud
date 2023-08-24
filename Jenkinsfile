@@ -12,14 +12,14 @@ pipeline {
     stages {
         stage ('Checkout'){
             steps{
-                script{
                     git 'https://github.com/alextct/PythonUsersCrud.git'
-                }
             }
         }
         stage('Start web_app'){
-            script{
-                shExitStatus = sh(script: 'ls && python3 rest_app.py', returnStatus: true)
+            steps{
+                script{
+                    shExitStatus = sh(script: 'ls && python3 rest_app.py', returnStatus: true)
+                }
             }
         }
     }
