@@ -18,7 +18,7 @@ pipeline {
         stage('Start web_app'){
             steps{
                 script{
-                    shExitStatus = sh(script: 'ls && python3 rest_app.py', returnStatus: true)
+                    shExitStatus = sh(script: 'ls && python3 app/rest_app.py', returnStatus: true)
                 }
             }
         }
