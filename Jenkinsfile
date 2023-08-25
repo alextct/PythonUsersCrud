@@ -54,7 +54,7 @@ pipeline {
             steps{
                 script{
                 sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                sh 'nohup python3 backend_testing.py &'
+                sh 'python3 backend_testing.py'
                 //shExitStatus = sh(script: 'nohup python3 backend_testing.py &', returnStatus: true)
                 }
             }
@@ -64,7 +64,7 @@ pipeline {
                 script{
                     sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
                     //shExitStatus = sh(script: 'nohup python3 frontend_testing.py &', returnStatus: true)
-                    sh 'nohup python3 frontend_testing.py &'
+                    sh 'python3 frontend_testing.py'
                 }
             }
         }
@@ -73,6 +73,7 @@ pipeline {
                 script{
                 sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
                     shExitStatus = sh(script: 'nohup python3 combined_testing.py &', returnStatus: true)
+                    sh 'python3 combined_testing.py'
                 }
             }
         }
@@ -81,7 +82,7 @@ pipeline {
                 script{
                     sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
                     //shExitStatus = sh(script: 'nohup python3 clean_environment.py', returnStatus: true)
-                    sh 'nohup python3 clean_environment.py &'
+                    sh 'python3 clean_environment.py'
                 }
             }
         }
