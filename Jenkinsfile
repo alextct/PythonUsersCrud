@@ -62,7 +62,7 @@ pipeline {
                 }
             }
         }
-        stage('Start Frontend Testing'){
+        stage('Start Combined Testing'){
             steps{
                 script{
                     shExitStatus = sh(script: 'nohup python3 combined_testing.py &', returnStatus: true)
