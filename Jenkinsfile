@@ -32,11 +32,27 @@ pipeline {
                 }
             }
         }
+        stage('Start RestServer'){
+            steps{
+                script{
+                    sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
+                    shExitStatus = sh(script: 'nohup python3 rest_app.py &', returnStatus: true)
+                }
+            }
+        }
         stage('Start WebServer'){
             steps{
                 script{
                     sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                    shExitStatus = sh(script: 'nohup python3 rest_app.py & && nohup python3 clean_environment.py', returnStatus: true)
+                    shExitStatus = sh(script: 'nohup python3 web_app.py &', returnStatus: true)
+                }
+            }
+        }
+        stage('Clean Environment'){
+            steps{
+                script{
+                    sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
+                    shExitStatus = sh(script: 'nohup python3 clean_environment.py', returnStatus: true)
                 }
             }
         }
