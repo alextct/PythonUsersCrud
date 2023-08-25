@@ -36,7 +36,7 @@ pipeline {
             steps{
                 script{
                     sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                    shExitStatus = sh(script: 'nohup python3 rest_app.py && nohup python3 clean_environment.py', returnStatus: true)
+                    shExitStatus = sh(script: 'nohup python3 rest_app.py & && nohup python3 clean_environment.py', returnStatus: true)
                 }
             }
         }
