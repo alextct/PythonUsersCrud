@@ -48,6 +48,27 @@ pipeline {
                 }
             }
         }
+        stage('Start Backend Testing'){
+            steps{
+                script{
+                    shExitStatus = sh(script: 'nohup python3 backend_testing.py &', returnStatus: true)
+                }
+            }
+        }
+        stage('Start Frontend Testing'){
+            steps{
+                script{
+                    shExitStatus = sh(script: 'nohup python3 frontend_testing.py &', returnStatus: true)
+                }
+            }
+        }
+        stage('Start Frontend Testing'){
+            steps{
+                script{
+                    shExitStatus = sh(script: 'nohup python3 combined_testing.py &', returnStatus: true)
+                }
+            }
+        }
         stage('Clean Environment'){
             steps{
                 script{
