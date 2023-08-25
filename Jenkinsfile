@@ -59,22 +59,25 @@ pipeline {
                 }
             }
         }
-        //stage('Start Frontend Testing'){
-            //steps{
-                //script{
-                    //sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                    //sh 'python3 frontend_testing.py'
-                //}
-            //}
-        //}
-        //stage('Start Combined Testing'){
-            //steps{
-                //script{
-                //sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                    //sh 'python3 combined_testing.py'
-                //}
-            //}
-        //}
+        stage('Start Frontend Testing'){
+            steps{
+                script{
+                    sh 'ls ./'
+                    sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
+                    //shExitStatus = sh(script: 'nohup python3 frontend_testing.py &', returnStatus: true)
+                    sh 'python3 frontend_testing.py'
+                }
+            }
+        }
+        stage('Start Combined Testing'){
+            steps{
+                script{
+                sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
+                    shExitStatus = sh(script: 'nohup python3 combined_testing.py &', returnStatus: true)
+                    sh 'python3 combined_testing.py'
+                }
+            }
+        }
         stage('Clean Environment'){
             steps{
                 script{
