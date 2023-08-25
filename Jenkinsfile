@@ -58,7 +58,8 @@ pipeline {
         stage('Start Frontend Testing'){
             steps{
                 script{
-                    shExitStatus = sh(script: 'nohup python3 frontend_testing.py &', returnStatus: true)
+                    //shExitStatus = sh(script: 'nohup python3 frontend_testing.py &', returnStatus: true)
+                    sh 'python3 frontend_testing.py'
                 }
             }
         }
