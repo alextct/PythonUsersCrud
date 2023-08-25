@@ -18,26 +18,16 @@ pipeline {
         stage('Install Dependencies'){
             steps{
                 script{
-                    def flaskInstalled = sh(script: 'pip3 show flask', returnStatus: true)
-                    if (flaskInstalled != 0) {
-                        echo "Flask is not installed. Installing..."
-                        sh 'pip3 install flask'
-                    } else {
-                        echo "Flask is already installed."
-                    }
-                    def pymysqlInstalled = sh(script: 'pip3 show pymysql', returnStatus: true)
-                    if (pymysqlInstalled != 0) {
-                        echo "pymysql is not installed. Installing..."
-                        sh 'pip3 install pymysql'
-                    } else {
-                        echo "pymysql is already installed."
-                    }
-                    def decoupledInstalled = sh(script: 'pip3 show python-decouple', returnStatus: true)
-                    if (decoupledInstalled != 0) {
-                        echo "python-decouple is not installed. Installing..."
-                        sh 'pip3 install python-decouple'
-                    } else {
-                        echo "python-decouple is already installed."
+                    def modules = ["flask", "pymysql", "python-decouple", "cryptography", "requests", "selenium"]
+
+                    for (module in modules) {
+                        def moduleInstalled = sh(script: "pip3 show ${module}", returnStatus: true)
+                        if (moduleInstalled != 0) {
+                            echo "${module} is not installed. Installing..."
+                            sh "pip3 install ${module}"
+                        } else {
+                            echo "${module} is already installed."
+                        }
                     }
                 }
             }
@@ -46,7 +36,7 @@ pipeline {
             steps{
                 script{
                     sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
-                    shExitStatus = sh(script: 'ls && pip show flask && python3 rest_app.py && python3 clean_environment.py', returnStatus: true)
+                    shExitStatus = sh(script: 'nohup python3 rest_app.py && nohup python3 clean_environment.py', returnStatus: true)
                 }
             }
         }
