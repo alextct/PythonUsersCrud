@@ -1,6 +1,6 @@
 import requests
 import sys
-from app.utils.mysql_connection import establish_connection
+from utils.mysql_connection import establish_connection
 import random
 
 postEndPoint = "http://127.0.0.1:5000/users/1"

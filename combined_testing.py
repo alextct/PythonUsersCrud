@@ -1,6 +1,6 @@
 import requests
 import sys
-from app.utils.mysql_connection import establish_connection
+from utils.mysql_connection import establish_connection
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import NoSuchElementException
