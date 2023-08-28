@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
-# options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-dev-shm-usage')
 # driver = webdriver.Chrome(service=Service("./chromedriver"), options=options)
 driver = webdriver.Chrome()
 # driver = webdriver.Chrome(executable_path="./chromedriver", options=options)
