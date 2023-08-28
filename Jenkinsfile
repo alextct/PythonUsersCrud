@@ -35,7 +35,7 @@ pipeline {
         stage('Start RestServer'){
             steps{
                 script{
-//                     sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
+                    sh 'export PYTHONPATH=/var/lib/jenkins/workspace/01CrudPythonProject/:$PYTHONPATH'
                     sh 'nohup python3 rest_app.py &'
                 }
             }
