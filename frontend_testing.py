@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 # driver = webdriver.Chrome(service=Service("/home/alex/work/learn/PythonDevopsLessons/chromedriver-linux64/chromedriver"))
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
-options.add_argument('--no-sandbox')
+# options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(service=Service("./chromedriver"), options=options)
 # driver = webdriver.Chrome()
