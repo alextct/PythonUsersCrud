@@ -61,6 +61,13 @@ pipeline {
                 }
             }
         }
+        stage('Check who is running on the same bound network 1'){
+            steps{
+                script{
+                    sh 'lsof -i :5000'
+                }
+            }
+        }
         stage('Start Frontend Testing'){
             steps{
                 script{
