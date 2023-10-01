@@ -96,7 +96,7 @@ pipeline {
                     //sh "docker rmi $registry:${imageVersion}"
                 //}
             //}
-        }
+        //}
 
         stage('Set Compose image version'){
             steps{
