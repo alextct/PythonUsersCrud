@@ -104,6 +104,13 @@ pipeline {
                 }
             }
         }
+        stage('Check who is running on the same binded network'){
+            steps{
+                script{
+                    sh 'lsof -i :5000'
+                }
+            }
+        }
         stage('Start app in docker with docker compose'){
             steps{
                 script{
