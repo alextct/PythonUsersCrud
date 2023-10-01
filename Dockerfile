@@ -6,5 +6,4 @@ RUN pip install flask \
     pip install pymysql \
     pip install requests
 EXPOSE 5000
-VOLUME /app/logs
 CMD python3 rest_app.py
