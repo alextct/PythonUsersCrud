@@ -3,6 +3,7 @@ pipeline {
     registry = 'alexelisei/python-app'
     registryCredential = 'docker-hub'
     dockerImage = ''
+    imageVersion = 'v1.0.0'
     }
     agent any
 
@@ -84,7 +85,7 @@ pipeline {
         stage('Build Docker Image and Push To DockerHub'){
             steps{
                 script{
-                    dockerImage = docker.build registry + ":latest"
+                    dockerImage = docker.build registry + ":" + imageVersion
                     docker.withRegistry('https://registry.hub.docker.com',registryCredential) {
                     dockerImage.push()
                     }
@@ -92,7 +93,7 @@ pipeline {
             }
             post {
                 always{
-                    sh "docker rmi $registry:latest"
+                    sh "docker rmi $registry:${imageVersion}"
                 }
             }
         }
