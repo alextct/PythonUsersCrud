@@ -89,21 +89,21 @@ pipeline {
                 }
             }
         }
-        //stage('Build Docker Image and Push To DockerHub'){
-            //steps{
-                //script{
-                    //dockerImage = docker.build registry + ":" + imageVersion
-                    //docker.withRegistry('https://registry.hub.docker.com',registryCredential) {
-                    //dockerImage.push()
-                    //}
-                //}
-            //}
+        stage('Build Docker Image and Push To DockerHub'){
+            steps{
+                script{
+                    dockerImage = docker.build registry + ":" + imageVersion
+                    docker.withRegistry('https://registry.hub.docker.com',registryCredential) {
+                    dockerImage.push()
+                    }
+                }
+            }
             //post {
                 //always{
                     //sh "docker rmi $registry:${imageVersion}"
                 //}
             //}
-        //}
+        }
 
         stage('Set Compose image version'){
             steps{
