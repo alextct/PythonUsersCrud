@@ -100,7 +100,7 @@ pipeline {
         stage('Set Compose image version'){
             steps{
                 script{
-                    sh 'echo IMAGE_TAG=${imageVersion} > .env'
+                    sh 'echo IMAGE_TAG=${imageVersion} >> .env'
                 }
             }
         }
