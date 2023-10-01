@@ -90,7 +90,11 @@ pipeline {
                     }
                 }
             }
-
+            post {
+                always{
+                    sh "docker rmi $registry:latest"
+                }
+            }
         }
     }
 }
