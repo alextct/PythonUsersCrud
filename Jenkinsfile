@@ -1,4 +1,9 @@
 pipeline {
+    environment{
+    registry = 'alexelisei/python-app'
+    registryCredential = '123+alex123+'
+    dockerImage = ''
+    }
     agent any
 
     triggers {
@@ -73,6 +78,21 @@ pipeline {
             steps{
                 script{
                     sh 'python3 clean_environment.py'
+                }
+            }
+        }
+        stage('Build Docker Image and Push To DockerHub'){
+            steps{
+                script{
+                    dockerImage = docker.build registry + "$BUILD_NUMBER"
+                    docker.withRegistry('',registryCredential) {
+                    dockerImage.push()
+                    }
+                }
+            }
+            post {
+                always{
+                    sh "docker rmi $registry:$BUILD_NUMBER"
                 }
             }
         }
