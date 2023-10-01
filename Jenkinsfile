@@ -1,7 +1,7 @@
 pipeline {
     environment{
     registry = 'alexelisei/python-app'
-    registryCredential = '123+alex123+'
+    registryCredential = 'docker-hub'
     dockerImage = ''
     }
     agent any
@@ -85,7 +85,7 @@ pipeline {
             steps{
                 script{
                     dockerImage = docker.build registry + ":latest"
-                    docker.withRegistry('',registryCredential) {
+                    docker.withRegistry('https://registry.hub.docker.com',registryCredential) {
                     dockerImage.push()
                     }
                 }
