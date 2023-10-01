@@ -1,7 +1,9 @@
 version: '3'
 services:
  web:
-  image: "alexelisei/python-app:latest"
+  environment:
+   - IMAGE_TAG
+  image: "alexelisei/python-app:${IMAGE_TAG}"
   ports:
   - "5000:5000"
 

@@ -97,6 +97,13 @@ pipeline {
                 }
             }
         }
+        stage('Set Compose image version'){
+            steps{
+                script{
+                    sh 'echo IMAGE_TAG=${imageVersion} > .env'
+                }
+            }
+        }
     }
 }
 
