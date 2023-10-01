@@ -82,15 +82,15 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Image and Push To DockerHub'){
-            steps{
-                script{
-                    dockerImage = docker.build registry + ":" + imageVersion
-                    docker.withRegistry('https://registry.hub.docker.com',registryCredential) {
-                    dockerImage.push()
-                    }
-                }
-            }
+        //stage('Build Docker Image and Push To DockerHub'){
+            //steps{
+                //script{
+                    //dockerImage = docker.build registry + ":" + imageVersion
+                    //docker.withRegistry('https://registry.hub.docker.com',registryCredential) {
+                    //dockerImage.push()
+                    //}
+                //}
+            //}
             //post {
                 //always{
                     //sh "docker rmi $registry:${imageVersion}"
@@ -104,7 +104,7 @@ pipeline {
                 }
             }
         }
-        stage('Check who is running on the same binded network'){
+        stage('Check who is running on the same bound network'){
             steps{
                 script{
                     sh 'lsof -i :5000'
