@@ -91,11 +91,11 @@ pipeline {
                     }
                 }
             }
-            post {
-                always{
-                    sh "docker rmi $registry:${imageVersion}"
-                }
-            }
+            #post {
+                #always{
+                    #sh "docker rmi $registry:${imageVersion}"
+                #}
+            #}
         }
         stage('Set Compose image version'){
             steps{
