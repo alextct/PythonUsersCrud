@@ -104,6 +104,27 @@ pipeline {
                 }
             }
         }
+        stage('Start app in docker with docker compose'){
+            steps{
+                script{
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+        stage('Wait for Docker Compose') {
+            steps {
+                script {
+                    sh 'sleep 30'
+                }
+            }
+        }
+        stage('Stop Docker Compose') {
+            steps {
+                script {
+                    sh 'docker-compose down'
+                }
+            }
+        }
     }
 }
 
