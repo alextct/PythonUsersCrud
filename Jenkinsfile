@@ -97,6 +97,7 @@ pipeline {
                 //}
             //}
         }
+
         stage('Set Compose image version'){
             steps{
                 script{
