@@ -1,7 +1,7 @@
 version: '3'
 services:
- db:
-  image: mysql:5.7
+ db-service:
+  image: mysql:8.0.33
   restart: always
   volumes:
    - ./dump:/docker-entrypoint-initdb.d
