@@ -92,7 +92,7 @@ pipeline {
         stage('Change db host'){
             steps{
                 script{
-                    sh "sed -i 's/DB_HOST=127.17.0.1/DB_HOST=db' .env"
+                    sh "sed -i 's/DB_HOST=127.17.0.1/DB_HOST=db/' .env"
                     sh 'cat .env'
                 }
             }
@@ -117,15 +117,6 @@ pipeline {
             steps{
                 script{
                     sh 'echo IMAGE_TAG=${imageVersion} >> .env'
-                    sh "sed -i 's/DB_HOST=127.17.0.1/DB_HOST=db' .env"
-                    sh 'cat .env'
-                }
-            }
-        }
-        stage('Check who is running on the same bound network'){
-            steps{
-                script{
-                    sh 'lsof -i :5000'
                 }
             }
         }
