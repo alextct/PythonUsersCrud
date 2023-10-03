@@ -5,5 +5,5 @@ services:
    - IMAGE_TAG
   image: "alexelisei/python-app:${IMAGE_TAG}"
   ports:
-  - "5000:5000"
+  - "6000:5000"
 
