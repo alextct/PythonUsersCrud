@@ -89,6 +89,14 @@ pipeline {
                 }
             }
         }
+        stage('Change db host'){
+            steps{
+                script{
+                    sh "sed -i 's/DB_HOST=127.17.0.1/DB_HOST=db' .env"
+                    sh 'cat .env'
+                }
+            }
+        }
         stage('Build Docker Image and Push To DockerHub'){
             steps{
                 script{
@@ -135,13 +143,13 @@ pipeline {
                 }
             }
         }
-        //stage('Stop Docker Compose') {
-            //steps {
-                //script {
-                    //sh 'docker-compose down'
-                //}
-            //}
-        //}
+        stage('Stop Docker Compose') {
+            steps {
+                script {
+                    sh 'docker-compose down'
+                }
+            }
+        }
     }
 }
 
