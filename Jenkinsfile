@@ -136,7 +136,7 @@ pipeline {
         stage('Stop Docker Compose') {
             steps {
                 script {
-                    sh 'docker-compose down'
+                    //sh 'docker-compose down'
                 }
             }
         }
