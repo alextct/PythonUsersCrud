@@ -109,6 +109,8 @@ pipeline {
             steps{
                 script{
                     sh 'echo IMAGE_TAG=${imageVersion} >> .env'
+                    sh "sed -i 's/DB_HOST=127.17.0.1/DB_HOST=db' .env"
+                    sh 'cat .env'
                 }
             }
         }
@@ -129,7 +131,7 @@ pipeline {
         stage('Wait for Docker Compose') {
             steps {
                 script {
-                    sh 'sleep 30'
+                    sh 'sleep 5'
                 }
             }
         }
