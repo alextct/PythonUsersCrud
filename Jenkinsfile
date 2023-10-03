@@ -92,7 +92,7 @@ pipeline {
         stage('Change db host'){
             steps{
                 script{
-                    sh "sed -i 's/DB_HOST=127.17.0.1/DB_HOST=db-service/' .env"
+                    sh "sed -i 's/DB_HOST=127.17.0.1/DB_HOST=database/' .env"
                     sh 'cat .env'
                 }
             }

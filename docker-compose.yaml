@@ -1,6 +1,6 @@
 version: '3'
 services:
- db-service:
+ database:
   image: mysql:8.0.33
   restart: always
   volumes:
